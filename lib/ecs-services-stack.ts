@@ -36,12 +36,15 @@ export class EcsServicesStack extends cdk.Stack {
 
     const bucket = s3.Bucket.fromBucketName(this, 'SharedStorageBucket', params.bucketName);
 
-    const internalApiRepository = ecr.Repository.fromRepositoryUri(
-      this, 'InternalFileApiRepository', params.internalFileApiRepositoryUri,
+    // ECR URI format: {account}.dkr.ecr.{region}.amazonaws.com/{repoName}
+    const internalApiRepository = ecr.Repository.fromRepositoryName(
+      this, 'InternalFileApiRepository',
+      params.internalFileApiRepositoryUri.split('/').pop()!,
     );
 
-    const internalDataRepository = ecr.Repository.fromRepositoryUri(
-      this, 'InternalDataApiRepository', params.internalDataApiRepositoryUri,
+    const internalDataRepository = ecr.Repository.fromRepositoryName(
+      this, 'InternalDataApiRepository',
+      params.internalDataApiRepositoryUri.split('/').pop()!,
     );
 
     new EcsServices(this, 'EcsServices', {
