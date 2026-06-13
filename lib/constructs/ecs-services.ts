@@ -161,7 +161,13 @@ export class EcsServices extends Construct {
       cluster,
       taskDefinition: dataApiTaskDef,
       desiredCount,
-      enableExecuteCommand: true,
+      enableExecuteCommand: false,
+      capacityProviderStrategies: [
+        {
+          capacityProvider: "staging-ecs-stack-EcsClusterEcsCapacityProviderEA96691A-vRwzMp0IUTL2",
+          weight: 1,
+        },
+      ],
       placementStrategies: [ecs.PlacementStrategy.spreadAcrossInstances()],
       minHealthyPercent: 0,
       maxHealthyPercent: 100,
