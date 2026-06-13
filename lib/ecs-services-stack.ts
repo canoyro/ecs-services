@@ -14,6 +14,7 @@ export interface EcsServicesParams {
   bucketName: string;
   internalFileApiRepositoryUri: string;
   internalDataApiRepositoryUri: string;
+  capacityProviderName: string;
 }
 
 interface EcsServicesStackProps extends cdk.StackProps {
@@ -52,6 +53,7 @@ export class EcsServicesStack extends cdk.Stack {
       bucket,
       internalApiRepository,
       internalDataRepository,
+      capacityProviderName: params.capacityProviderName,
       desiredCount: params.desiredCount ?? 1,
     });
   }
