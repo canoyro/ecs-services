@@ -16,6 +16,7 @@ const MOCK_PARAMS: EcsServicesParams = {
   bucketName: 'staging-ecs-stack-shared-storage',
   internalFileApiRepositoryUri: `${ACCOUNT}.dkr.ecr.${REGION}.amazonaws.com/internal-file-api`,
   internalDataApiRepositoryUri: `${ACCOUNT}.dkr.ecr.${REGION}.amazonaws.com/internal-data-api`,
+  capacityProviderName: 'staging-ecs-stack-EcsClusterEcsCapacityProviderEA96691A-vRwzMp0IUTL2',
 };
 
 function buildTemplate(overrides: Record<string, unknown> = {}): Template {

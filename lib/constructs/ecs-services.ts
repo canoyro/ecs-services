@@ -11,6 +11,7 @@ interface EcsServicesProps {
   bucket: s3.IBucket;
   internalApiRepository: ecr.IRepository;
   internalDataRepository: ecr.IRepository;
+  capacityProviderName: string;
   desiredCount: number;
 }
 
@@ -18,7 +19,7 @@ export class EcsServices extends Construct {
   constructor(scope: Construct, id: string, props: EcsServicesProps) {
     super(scope, id);
 
-    const { cluster, bucket, internalApiRepository, internalDataRepository, desiredCount } = props;
+    const { cluster, bucket, internalApiRepository, internalDataRepository, capacityProviderName, desiredCount } = props;
     const stackName = cdk.Stack.of(this).stackName;
     const minTaskCount = desiredCount > 0 ? 1 : 0;
 
@@ -102,7 +103,13 @@ export class EcsServices extends Construct {
       cluster,
       taskDefinition: fileApiTaskDef,
       desiredCount,
-      enableExecuteCommand: true,
+      enableExecuteCommand: false,
+      capacityProviderStrategies: [
+        {
+          capacityProvider: capacityProviderName,
+          weight: 1,
+        },
+      ],
       placementStrategies: [ecs.PlacementStrategy.spreadAcrossInstances()],
       // Fixed hostPort requires stop-before-start; 200% would try to run two tasks on the
       // same port on a single instance, leaving the replacement stuck in PROVISIONING.
@@ -164,7 +171,7 @@ export class EcsServices extends Construct {
       enableExecuteCommand: false,
       capacityProviderStrategies: [
         {
-          capacityProvider: "staging-ecs-stack-EcsClusterEcsCapacityProviderEA96691A-vRwzMp0IUTL2",
+          capacityProvider: capacityProviderName,
           weight: 1,
         },
       ],
