@@ -1,0 +1,9 @@
+{
+  "prefix": "staging",
+  "desiredCount": 1,
+  "vpcId": "<REPLACE: copy vpcId from ecs-processor/parameters.json>",
+  "clusterName": "<REPLACE: EcsClusterName CloudFormation output from ecs-processor>",
+  "bucketName": "<REPLACE: SharedStorageBucketName CloudFormation output from ecs-processor>",
+  "internalFileApiRepositoryUri": "<REPLACE: EcsInternalApiRepositoryUri CloudFormation output from ecs-processor>",
+  "internalDataApiRepositoryUri": "<REPLACE: EcsInternalDataRepositoryUri CloudFormation output from ecs-processor>"
+}
