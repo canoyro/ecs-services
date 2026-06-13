@@ -1,9 +1,9 @@
 {
   "prefix": "staging",
   "desiredCount": 1,
-  "vpcId": "vpc-04571bb185086fe7f",
-  "clusterName": "stgin-ecs-stack-cluster",
-  "bucketName": "staging-ecs-stack-shared-storage",
-  "internalFileApiRepositoryUri": "581145854871.dkr.ecr.ap-southeast-2.amazonaws.com/internal-file-api",
-  "internalDataApiRepositoryUri": "581145854871.dkr.ecr.ap-southeast-2.amazonaws.com/internal-data-api"
+  "vpcId": "<REPLACE: copy vpcId from ecs-processor/parameters.json>",
+  "clusterName": "<REPLACE: EcsClusterName CloudFormation output from ecs-processor>",
+  "bucketName": "<REPLACE: SharedStorageBucketName CloudFormation output from ecs-processor>",
+  "internalFileApiRepositoryUri": "<REPLACE: EcsInternalApiRepositoryUri CloudFormation output from ecs-processor>",
+  "internalDataApiRepositoryUri": "<REPLACE: EcsInternalDataRepositoryUri CloudFormation output from ecs-processor>"
 }
