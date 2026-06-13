@@ -104,8 +104,10 @@ export class EcsServices extends Construct {
       desiredCount,
       enableExecuteCommand: true,
       placementStrategies: [ecs.PlacementStrategy.spreadAcrossInstances()],
-      minHealthyPercent: 50,
-      maxHealthyPercent: 200,
+      // Fixed hostPort requires stop-before-start; 200% would try to run two tasks on the
+      // same port on a single instance, leaving the replacement stuck in PROVISIONING.
+      minHealthyPercent: 0,
+      maxHealthyPercent: 100,
       circuitBreaker: { rollback: true },
     });
 
@@ -161,8 +163,8 @@ export class EcsServices extends Construct {
       desiredCount,
       enableExecuteCommand: true,
       placementStrategies: [ecs.PlacementStrategy.spreadAcrossInstances()],
-      minHealthyPercent: 50,
-      maxHealthyPercent: 200,
+      minHealthyPercent: 0,
+      maxHealthyPercent: 100,
       circuitBreaker: { rollback: true },
     });
 
